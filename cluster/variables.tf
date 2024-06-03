@@ -29,3 +29,9 @@ variable "deploy_manifests" {
   description = "Set to false if you don't want the module to deploy EKS Lens to the cluster"
   default     = true
 }
+
+variable "permissions_boundary" {
+  type        = string
+  description = "If provided, all IAM roles will be created with this permissions boundary attached."
+  default     = ""
+}

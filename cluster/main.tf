@@ -50,6 +50,7 @@ resource "aws_iam_role" "doit_eks_lens_collector" {
 
   name               = "doit_eks_${local.region}_${var.cluster.name}"
   assume_role_policy = data.aws_iam_policy_document.doit_eks_lens_collector[count.index].json
+  permissions_boundary = var.permissions_boundary
 }
 
 resource "aws_iam_role_policy_attachment" "doit_eks_lens_collector" {
