@@ -104,3 +104,8 @@ variable "kube_state_node_selector" {
   type = map(string)
   default = null
 }
+
+variable "kube_image_pull_secrets" {
+  type = list(string)
+  default = []
+}

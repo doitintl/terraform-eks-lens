@@ -440,6 +440,13 @@ resource "kubernetes_deployment" "collector" {
         restart_policy       = "Always"
         service_account_name = kubernetes_service_account.doit_collector[count.index].metadata[0].name
 
+        dynamic "image_pull_secrets" {
+          for_each = var.kube_image_pull_secrets
+          content {
+            name = image_pull_secrets.value
+          }
+        }
+
         container {
           name  = "otelcol"
           image = var.cluster.otel_image
