@@ -177,6 +177,13 @@ resource "kubernetes_deployment" "kube_state_metrics" {
         service_account_name            = kubernetes_service_account.doit_kube_state_metrics[count.index].metadata[0].name
         automount_service_account_token = true
 
+        dynamic "image_pull_secrets" {
+          for_each = var.kube_image_pull_secrets
+          content {
+            name = image_pull_secrets.value
+          }
+        }
+
         container {
           name  = "kube-state-metrics"
           image = var.cluster.kube_state_image
