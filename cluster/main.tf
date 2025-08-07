@@ -3,7 +3,7 @@ data "aws_region" "current" {}
 
 locals {
   account_id         = data.aws_caller_identity.current.account_id
-  region             = data.aws_region.current.name
+  region             = data.aws_region.current.region
   s3_bucket          = "doitintl-eks-metrics-${local.account_id}-${local.region}"
   s3_policy_arn      = "arn:aws:iam::${local.account_id}:policy/doit_eks_lens_s3_${local.region}"
   cluster_issuer_url = replace(var.cluster_oidc_issuer_url, "https://", "")
